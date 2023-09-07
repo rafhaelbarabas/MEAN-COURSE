@@ -1,4 +1,4 @@
-# Snacker's point
+# Snack's point
 
 This the a Phase-End project.
 
@@ -13,6 +13,7 @@ Bootstrap, and JavaScript
 - CSS
 - Vanilla Javascript
 - Bootstrap
+- Webpack
 
 # Task (Activities)
 
