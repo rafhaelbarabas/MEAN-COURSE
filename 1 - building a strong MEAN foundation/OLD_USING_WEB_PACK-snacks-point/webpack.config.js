@@ -43,6 +43,10 @@ module.exports = {
             // Loads a SASS/SCSS file and compiles it to CSS
             loader: "sass-loader",
           },
+          {
+            test: /\.html$/i,
+            loader: "html-loader",
+          },
         ],
       },
     ],
