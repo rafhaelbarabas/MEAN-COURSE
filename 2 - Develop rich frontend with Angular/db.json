@@ -1,0 +1,39 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "Ari",
+      "position": "Senior Software Engineer"
+    },
+    {
+      "id": 2,
+      "name": "Otto",
+      "position": "Mid-Level Software Engineer"
+    },
+    {
+      "id": 3,
+      "name": "Mel",
+      "position": "Junior Software Engineer"
+    },
+    {
+      "id": 4,
+      "name": "Rafhael",
+      "position": "Principal Software Engineer"
+    },
+    {
+      "id": 5,
+      "name": "John",
+      "position": "Manager"
+    },
+    {
+      "id": 9,
+      "name": "John Doe",
+      "position": "Principal Software Engineer"
+    },
+    {
+      "id": 10,
+      "name": "Mr Crowley",
+      "position": "Manager"
+    }
+  ]
+}

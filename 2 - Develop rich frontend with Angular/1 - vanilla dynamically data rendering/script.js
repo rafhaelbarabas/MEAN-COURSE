@@ -1,5 +1,26 @@
 const employeeList = document.getElementById("employee-list");
-const employeeTable = document.getElementById("employee-table");
+const tableContainer = document.getElementById("table-container");
+
+const addNewEmployee = async (employeeData) => {
+  try {
+    const headers = {
+      "Content-type": "application/json",
+    };
+
+    const response = await fetch("http://localhost:3000/employees", {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(employeeData),
+    });
+    const data = await response.json();
+    alert(`Employee: ${data.name} added`);
+  } catch (error) {
+    console.error("Something went wrong...");
+    console.error(error);
+  } finally {
+    fetchEmployees();
+  }
+};
 
 const fetchEmployees = async () => {
   try {
@@ -9,7 +30,7 @@ const fetchEmployees = async () => {
     displayEmployees(employees);
     generateTable(employees);
   } catch (error) {
-    console.error("Something went wrong", error);
+    console.error("Something went wrong...");
   }
 };
 
@@ -23,6 +44,15 @@ const displayEmployees = (employees) => {
 };
 
 const generateTable = (employees) => {
+  const currentTable = tableContainer.firstElementChild;
+  console.log(currentTable);
+  if (currentTable) {
+    tableContainer.removeChild(currentTable);
+  }
+
+  const employeeTable = document.createElement("table");
+  employeeTable.id = "employee-table";
+
   const headers = ["ID", "Name", "Position"];
   const thead = document.createElement("thead");
   const headerRow = document.createElement("tr");
@@ -59,3 +89,4 @@ const generateTable = (employees) => {
 };
 
 fetchEmployees();
+// addNewEmployee({ id: 10, name: "Mr Crowley", position: "Manager" });
