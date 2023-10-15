@@ -28,7 +28,7 @@ wishlistItems
     const c1 = document.createElement("td");
     c1.id = "div-menu-items";
     const img = document.createElement("img");
-    img.setAttribute("src", item.imgSrc);
+    img.setAttribute("src", item.img);
 
     c1.appendChild(img);
 
@@ -46,3 +46,13 @@ wishlistItems
 
 const total = document.getElementById("total");
 total.innerHTML = `Total: $ ${itemsSum.toFixed(2)}`;
+
+document.getElementById("clear-wishlist-button").addEventListener("click", () => {
+  const clearList = confirm("Are you sure you want to clear your wishlist?");
+  if (!clearList) return;
+  localStorage.removeItem("wishlistItems");
+  wishlistItems = [];
+  tableBody.innerHTML = "";
+  total.innerHTML = `Total: $ 0.00`;
+  updateItemsCount();
+});

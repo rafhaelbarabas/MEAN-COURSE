@@ -6,6 +6,12 @@
   width: 80px;
 }
 
+#filter-menu-items img {
+  border-radius: 50%;
+  width: 80px;
+  width: 80px;
+}
+
 .card {
   margin-top: 4px;
   margin-bottom: 4px;
