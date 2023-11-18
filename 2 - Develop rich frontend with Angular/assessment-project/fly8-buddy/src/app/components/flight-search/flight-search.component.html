@@ -1,0 +1,94 @@
+<div class="card">
+  <form [formGroup]="searchForm">
+    <div class="form-check">
+      <input
+        (click)="toggleOneWay()"
+        [checked]="isOneWaySelected"
+        class="form-check-input"
+        type="radio"
+        name="oneWay"
+        id="oneWay"
+      />
+      <label class="form-check-label" for="oneWay">One way</label>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="form-floating">
+        <input
+          id="origin"
+          class="form-control"
+          type="text"
+          formControlName="origin"
+        />
+        <label for="origin" class="form-label"> Flying from </label>
+      </div>
+      <div class="form-floating">
+        <input
+          id="destination"
+          class="form-control"
+          type="text"
+          formControlName="destination"
+        />
+        <label for="destination" class="form-label"> Flying to </label>
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="form-floating">
+        <input
+          id="date"
+          type="date"
+          class="form-control"
+          formControlName="date"
+        />
+        <label for="date"> Departure date </label>
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="form-floating">
+        <input
+          class="form-control"
+          id="numberOfAdults"
+          type="number"
+          formControlName="numberOfAdults"
+        />
+        <label for="numberOfAdults"> Adults (18+) </label>
+      </div>
+
+      <div class="form-floating">
+        <input
+          class="form-control"
+          id="numberOfChildren"
+          type="number"
+          formControlName="numberOfChildren"
+        />
+        <label for="numberOfChildren"> Children (0-17) </label>
+      </div>
+
+      <div class="form-floating">
+        <select
+          id="travelClass"
+          class="form-select"
+          formControlName="travelClass"
+        >
+          <option selected value="ECONOMY">Economy</option>
+          <option value="BUSINESS">Business</option>
+          <option value="FIRST">First</option>
+        </select>
+        <label for="travelClass"> Travel Class </label>
+      </div>
+    </div>
+
+    <div class="d-grid gap-2">
+      <button
+        (click)="onSubmit()"
+        class="button"
+        class="btn btn-primary"
+        type="submit"
+      >
+        Show Flights
+      </button>
+    </div>
+  </form>
+</div>

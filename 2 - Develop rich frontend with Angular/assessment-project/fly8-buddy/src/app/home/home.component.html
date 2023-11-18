@@ -1,1 +1,43 @@
-<p>home works!</p>
+<div id="main-container" class="container-fluid">
+  <div class="row">
+    <div id="iata-code-prices" class="col-2">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Code</th>
+            <th scope="col">Company</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let price of prices">
+            <td scope="row">{{ price.code }}</td>
+            <td scope="row">{{ price.name }}</td>
+            <td scope="row">{{ price.price }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-8">
+      <app-flight-search></app-flight-search>
+    </div>
+
+    <div id="iata-code-cities" class="custom-table-card col-2">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Code</th>
+            <th scope="col">Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let city of cities">
+            <td scope="row">{{ city.code }}</td>
+            <td scope="row">{{ city.name }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
