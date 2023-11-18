@@ -2,11 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const fs = require("fs");
-
-// const Flight = require("./models/Flight");
-// const FlightDetails = require("./models/FlightDetails");
 const FlightManager = require("./models/FlightManager");
-// const Booking = require("./models/Booking");
 
 const app = express();
 
@@ -28,9 +24,20 @@ app.get("/destinations", (req, res) => {
 
 // Endpoint to provide flight source and destination data
 app.get("/flights", (req, res) => {
-  console.log("flights");
+  try {
+    const flights = flightManager.getFlights(
+      req.query.source,
+      req.query.destination,
+      req.query.date,
+      req.query.numberOfAdults || 1,
+      req.query.numberOfChildren || 0,
+      req.query.travelClass || "ECONOMY"
+    );
 
-  res.json({});
+    res.json(flights);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
 });
 
 // POST endpoint to handle user input
