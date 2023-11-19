@@ -8,10 +8,22 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { FlightDetailComponent } from './components/flight-detail/flight-detail.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, FlightSearchComponent, FlightDetailComponent],
-  imports: [BrowserModule, ReactiveFormsModule, NgbModule, HttpClientModule],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    FlightSearchComponent,
+    FlightDetailComponent,
+  ],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    NgbModule,
+    HttpClientModule,
+    AppRoutingModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

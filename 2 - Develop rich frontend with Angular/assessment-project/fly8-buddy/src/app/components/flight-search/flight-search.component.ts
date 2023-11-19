@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { FlightSearchService } from './flight-search.service';
-import { City } from 'src/app/types';
+import { City, Flight } from 'src/app/types';
 
 export interface SearchFormProps {
   source: string;
@@ -20,15 +20,16 @@ export interface SearchFormProps {
 export class FlightSearchComponent implements OnInit {
   isOneWaySelected = false;
   cities: City[] = [];
-  searchForm = this.formBuilder.group<SearchFormProps>({
+  defaultSearchProps: SearchFormProps = {
     source: '',
     destination: '',
     date: '',
     numberOfAdults: 1,
     numberOfChildren: 0,
     travelClass: 'ECONOMY',
-  });
-
+  };
+  searchForm = this.formBuilder.group<SearchFormProps>(this.defaultSearchProps);
+  flights: Flight[] = [];
   travelClasses = ['FIRST', 'BUSINESS', 'ECONOMY'];
 
   constructor(
@@ -47,13 +48,16 @@ export class FlightSearchComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.searchForm.value);
-
     this.service
       .getFlights(this.searchForm.value as SearchFormProps)
       .subscribe((res) => {
-        console.log(res);
+        this.flights = res;
       });
+  }
+
+  resetFilters(): void {
+    this.searchForm.setValue(this.defaultSearchProps);
+    this.flights = [];
   }
 
   toggleOneWay(): void {

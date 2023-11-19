@@ -83,7 +83,7 @@
       </div>
     </div>
 
-    <div class="d-grid gap-2">
+    <div class="d-grid gap-2 col-6 mx-auto">
       <button
         (click)="onSubmit()"
         class="button"
@@ -92,6 +92,34 @@
       >
         Show Flights
       </button>
+      <button
+        (click)="resetFilters()"
+        class="button"
+        class="btn btn-secondary"
+        type="submit"
+      >
+        Reset filters
+      </button>
     </div>
   </form>
+
+  <div id="search-result">
+    <h3>Search results</h3>
+    <p *ngIf="flights.length === 0">No flights found</p>
+    <ul *ngIf="flights.length > 0">
+      <li *ngFor="let flight of flights">
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ flight.route.source }} - {{ flight.route.destination }} - Date:
+            {{ flight.date }}
+          </h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            Company: {{ flight.company }} - Airline: {{ flight.airlineNumber }}
+          </h6>
+          <p class="card-text">Price: {{ flight.price }}</p>
+          <a href="#" class="card-link">Book</a>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>

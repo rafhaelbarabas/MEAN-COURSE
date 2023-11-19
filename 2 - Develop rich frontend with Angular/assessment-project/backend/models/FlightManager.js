@@ -134,14 +134,14 @@ class FlightManager {
     numberOfChildren = parseInt(numberOfChildren);
 
     const travelClassMultiplier =
-      travelClass === "FIRST" ? 1.5 : travelClass === "BUSINESS" ? 1.2 : 1;
+      travelClass === "FIRST" ? 15.5 : travelClass === "BUSINESS" ? 8.5 : 2.5;
 
     const basePrice = companyPrice * travelClassMultiplier + routePrice;
 
     const numberOfPersonsWithChildrenDiscount =
       numberOfAdults + numberOfChildren * 0.6;
 
-    return basePrice * numberOfPersonsWithChildrenDiscount;
+    return (basePrice * numberOfPersonsWithChildrenDiscount).toFixed(2);
   }
 
   buildAirlineNumber(companyCode, flightId) {
@@ -157,40 +157,46 @@ class FlightManager {
     numberOfChildren,
     travelClass
   ) {
-    const route = routes.filter((route) => {
-      return route.source === source && route.destination === destination;
-    })[0];
+    const isFilterApplied = source && destination && date;
 
-    const flights = availableFlights.filter((flight) => {
-      return (
-        flight.route.source === source &&
-        flight.route.destination === destination &&
-        flight.date === date
+    const matchingRoutes = isFilterApplied
+      ? routes.filter(
+          (route) =>
+            route.source === source && route.destination === destination
+        )
+      : routes;
+
+    const matchingFlights = isFilterApplied
+      ? availableFlights.filter(
+          (flight) =>
+            flight.route.source === source &&
+            flight.route.destination === destination &&
+            flight.date === date
+        )
+      : availableFlights;
+
+    return matchingFlights.map((flight) => {
+      const company = companies.find((c) => c.code === flight.company);
+
+      const calculatedPrice = this.calculatePrice(
+        company.price,
+        isFilterApplied
+          ? matchingRoutes[0]?.price
+          : routes.find((r) => r.source === flight.route.source)?.price,
+        numberOfAdults,
+        numberOfChildren,
+        travelClass
       );
-    });
-
-    const flightsWithPrice = flights.map((flight) => {
-      const company = companies.find((company) => {
-        return company.code === flight.company;
-      });
 
       return {
         id: flight.id,
         company: company.name,
-        price: this.calculatePrice(
-          company.price,
-          route.price,
-          numberOfAdults,
-          numberOfChildren,
-          travelClass
-        ),
+        price: calculatedPrice,
         airlineNumber: this.buildAirlineNumber(company.code, flight.id),
-        route: route,
+        route: isFilterApplied ? matchingRoutes[0] : flight.route,
         date: flight.date,
       };
     });
-
-    return flightsWithPrice;
   }
 }
 
