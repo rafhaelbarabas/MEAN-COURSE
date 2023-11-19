@@ -4,3 +4,8 @@ export interface IATACodes {
     price: number;
   };
 }
+
+export interface City {
+  code: string;
+  name: string;
+}

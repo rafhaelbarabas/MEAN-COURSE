@@ -14,21 +14,24 @@
 
     <div class="input-group mb-3">
       <div class="form-floating">
-        <input
-          id="source"
-          class="form-control"
-          type="text"
-          formControlName="source"
-        />
+        <select id="source" class="form-select" formControlName="source">
+          <option *ngFor="let city of cities" value="{{ city.code }}">
+            {{ city.code }} - {{ city.name }}
+          </option>
+        </select>
         <label for="source" class="form-label"> Flying from </label>
       </div>
+
       <div class="form-floating">
-        <input
+        <select
           id="destination"
-          class="form-control"
-          type="text"
+          class="form-select"
           formControlName="destination"
-        />
+        >
+          <option *ngFor="let city of cities" value="{{ city.code }}">
+            {{ city.code }} - {{ city.name }}
+          </option>
+        </select>
         <label for="destination" class="form-label"> Flying to </label>
       </div>
     </div>

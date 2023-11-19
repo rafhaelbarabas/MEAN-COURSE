@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
+import { City } from '../types';
 
 interface CompanyPrices {
   code: string;
   name: string;
   price: number;
-}
-
-interface Cities {
-  code: string;
-  name: string;
 }
 
 @Component({
@@ -19,7 +15,7 @@ interface Cities {
 })
 export class HomeComponent implements OnInit {
   prices: CompanyPrices[] = [];
-  cities: Cities[] = [];
+  cities: City[] = [];
 
   constructor(private service: HomeService) {}
 
@@ -28,7 +24,7 @@ export class HomeComponent implements OnInit {
       this.prices = res as CompanyPrices[];
     });
     this.service.getDestinations().subscribe((res) => {
-      this.cities = res as Cities[];
+      this.cities = res as City[];
     });
   }
 }

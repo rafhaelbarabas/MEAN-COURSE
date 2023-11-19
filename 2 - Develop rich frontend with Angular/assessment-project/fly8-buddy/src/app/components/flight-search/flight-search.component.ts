@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { FlightSearchService } from './flight-search.service';
+import { City } from 'src/app/types';
 
 export interface SearchFormProps {
   source: string;
@@ -16,14 +17,14 @@ export interface SearchFormProps {
   templateUrl: './flight-search.component.html',
   styleUrls: ['./flight-search.component.css'],
 })
-export class FlightSearchComponent {
+export class FlightSearchComponent implements OnInit {
   isOneWaySelected = false;
-
+  cities: City[] = [];
   searchForm = this.formBuilder.group<SearchFormProps>({
     source: '',
     destination: '',
     date: '',
-    numberOfAdults: 0,
+    numberOfAdults: 1,
     numberOfChildren: 0,
     travelClass: 'ECONOMY',
   });
@@ -33,10 +34,16 @@ export class FlightSearchComponent {
   constructor(
     private formBuilder: FormBuilder,
     private service: FlightSearchService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     if (!this.isOneWaySelected) {
       this.searchForm.disable();
     }
+
+    this.service.getDestinations().subscribe((res) => {
+      this.cities = res;
+    });
   }
 
   onSubmit(): void {
